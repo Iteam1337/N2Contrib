@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <title>N2 Contrib Testhelper</title>
+    <version>$version$</version>
+    <authors>$author$</authors>
+    <description>$description$</description>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="N2CM" version="2.2.3" />
+    </dependencies>
+    <projectUrl></projectUrl>
+    <tags>N2 Testing</tags>
+  </metadata>
+</package>

@@ -52,6 +52,9 @@
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.2.9.2.2\lib\Lucene.Net.dll</HintPath>
     </Reference>
+    <Reference Include="MvcContrib.TestHelper">
+      <HintPath>..\packages\MvcContrib.Mvc3.TestHelper-ci.3.0.97.0\lib\MvcContrib.TestHelper.dll</HintPath>
+    </Reference>
     <Reference Include="N2">
       <HintPath>..\packages\N2CMS.2.2.3\lib\N2.dll</HintPath>
     </Reference>
@@ -69,6 +72,9 @@
     </Reference>
     <Reference Include="NHibernate.Caches.SysCache2">
       <HintPath>..\packages\N2CMS.2.2.3\lib\NHibernate.Caches.SysCache2.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\packages\RhinoMocks.3.6\lib\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -89,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Data\n2_host.config" />
+    <None Include="N2Contrib.TestHelper.nuspec" />
     <None Include="N2\N2.zip" />
     <None Include="packages.config" />
   </ItemGroup>
