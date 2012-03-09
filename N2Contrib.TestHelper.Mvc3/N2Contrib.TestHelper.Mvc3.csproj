@@ -55,9 +55,6 @@
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.2.9.2.2\lib\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="MvcContrib.TestHelper">
-      <HintPath>..\packages\MvcContrib.Mvc3.TestHelper-ci.3.0.97.0\lib\MvcContrib.TestHelper.dll</HintPath>
-    </Reference>
     <Reference Include="N2">
       <HintPath>..\packages\N2CMS.2.2.3\lib\N2.dll</HintPath>
     </Reference>
