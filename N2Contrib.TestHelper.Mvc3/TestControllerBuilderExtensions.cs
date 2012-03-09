@@ -21,25 +21,47 @@ namespace N2Contrib.TestHelper
     /// </summary>
     public static class TestControllerBuilderExtensions
     {
+		/// <summary>
+		/// Initializes a Content Controller setting controller context (unless it has been already set), engine and current item.
+		/// </summary>
+		public static TController InitializeContentController<TController>(this TController controller)
+			where TController : Controller
+		{
+			AssignContext(controller);
+			Utility.SetProperty(controller, "Engine", CreateFakeEngine());
+			Utility.SetProperty(controller, "CurrentItem", controller.CreateContentItem(controller.GetType().BaseType.GetGenericArguments()[0], "item"));
+			return controller;
+		}
+
         /// <summary>
-        /// Initializes a Content Controller
+        /// Initializes a Content Controller setting controller context (unless it has been already set), engine and current item.
         /// </summary>
-        /// <param name="builder"></param>
         /// <param name="controller"></param>
-        public static ContentController<T> InitializeContentController<T>(this ContentController<T> controller, bool userIsAdmin = false, bool userIsEditor = false) where T : ContentItem, new()
+        private static ContentController<T> InitializeContentController<T>(this ContentController<T> controller) where T : ContentItem, new()
         {
-            if (controller.ControllerContext == null)
-            {
-                var context = new FakeHttpContext();
-                controller.ControllerContext = new ControllerContext(new RequestContext(context, new RouteData()), controller);
-            }
-            controller.Engine = new FakeEngine();
-            controller.MockN2Service<IPersister>(new ContentPersister(new FakeRepository<ContentItem>(), new FakeRepository<ContentDetail>()));
-            controller.MockN2Service<ISecurityManager>(new FakeSecurityManager());
-            controller.MockN2Service<IDefinitionManager>(new DefinitionManager(new IDefinitionProvider[0], new ITemplateProvider[0], new ContentActivator(new N2.Edit.Workflow.StateChanger(), null, new N2.Persistence.Proxying.EmptyProxyFactory()), new N2.Edit.Workflow.StateChanger()));
+			AssignContext(controller);
+			controller.Engine = CreateFakeEngine();
             controller.CurrentItem = controller.CreateContentItem<T>("item");
             return controller;
         }
+
+		private static FakeEngine CreateFakeEngine()
+		{
+			var engine = new FakeEngine();
+			engine.AddComponent<IPersister>(new ContentPersister(new FakeRepository<ContentItem>(), new FakeRepository<ContentDetail>()));
+			engine.AddComponent<ISecurityManager>(new FakeSecurityManager());
+			engine.AddComponent<IDefinitionManager>(new DefinitionManager(new IDefinitionProvider[0], new ITemplateProvider[0], new ContentActivator(new N2.Edit.Workflow.StateChanger(), null, new N2.Persistence.Proxying.EmptyProxyFactory()), new N2.Edit.Workflow.StateChanger()));
+			return engine;
+		}
+
+		private static void AssignContext(Controller controller)
+		{
+			if (controller.ControllerContext == null)
+			{
+				var context = new FakeHttpContext();
+				controller.ControllerContext = new ControllerContext(new RequestContext(context, new RouteData()), controller);
+			}
+		}
 
 
 
@@ -50,9 +72,14 @@ namespace N2Contrib.TestHelper
         /// <typeparam name="T"></typeparam>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public static T CreateContentItem<T>(this Controller controller, string name, params ContentItem[] children) where T : ContentItem, new()
+		public static T CreateContentItem<T>(this Controller controller, string name, params ContentItem[] children) where T : ContentItem, new()
+		{
+			return (T)controller.CreateContentItem(typeof(T), name, children);
+		}
+
+		public static ContentItem CreateContentItem(this Controller controller, Type contentType, string name, params ContentItem[] children) 
         {
-            var item = new T();
+            var item = (ContentItem)Activator.CreateInstance(contentType);
 
 			item.ID = id++;
 			item.Name = name;
@@ -72,11 +99,9 @@ namespace N2Contrib.TestHelper
             return names.Select(n => controller.CreateContentItem<T>(n));
         }
 
-        public static Controller MockN2Service<T>(this Controller controller, T implementation)
+        public static void AddComponent<T>(this IEngine engine, T implementation)
         {
-            var engine = N2.Utility.GetProperty(controller, "Engine") as IEngine;
             engine.Container.AddComponentInstance(implementation.GetType().Name, typeof(T), implementation);
-            return controller;
         }
 
         public static Controller MakeUserAdmin<T>(this Controller controller)
