@@ -89,7 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App_Data\n2_host.config" />
-    <None Include="N2\N2.zip" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

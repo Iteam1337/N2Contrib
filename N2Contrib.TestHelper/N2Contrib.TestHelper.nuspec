@@ -10,7 +10,7 @@
     <dependencies>
       <dependency id="N2CM" version="2.2.3" />
     </dependencies>
-    <projectUrl></projectUrl>
+    <projectUrl>https://github.com/24hr/N2Contrib.TestHelper</projectUrl>
     <tags>N2 Testing</tags>
   </metadata>
 </package>
