@@ -2,14 +2,13 @@
 <package>
   <metadata>
     <id>$id$</id>
-    <title>N2 Contrib Testhelper Mvc3</title>
+    <title>N2Contrib.Testhelper.Mvc3</title>
     <version>$version$</version>
     <authors>$author$</authors>
     <description>$description$</description>
     <language>en-US</language>
     <dependencies>
-      <dependency id="N2CM" version="2.2.3" />
-      <dependency id="MvcContrib.Mvc3.TestHelper-ci" version="3.0.97.0" />
+      <dependency id="N2Contrib.TestHelper" version="0.1" />
     </dependencies>
     <projectUrl>https://github.com/24hr/N2Contrib.TestHelper</projectUrl>
     <tags>N2 Testing Mvc</tags>

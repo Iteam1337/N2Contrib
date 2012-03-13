@@ -2,13 +2,13 @@
 <package>
   <metadata>
     <id>$id$</id>
-    <title>N2 Contrib Testhelper</title>
+    <title>N2Contrib.Testhelper</title>
     <version>$version$</version>
     <authors>$author$</authors>
     <description>$description$</description>
     <language>en-US</language>
     <dependencies>
-      <dependency id="N2CM" version="2.2.3" />
+      <dependency id="N2CMS" version="2.2.3" />
     </dependencies>
     <projectUrl>https://github.com/24hr/N2Contrib.TestHelper</projectUrl>
     <tags>N2 Testing</tags>

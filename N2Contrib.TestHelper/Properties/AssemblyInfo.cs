@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("N2Contrib.TestHelper")]
-[assembly: AssemblyDescription("Contains various helpers")]
+[assembly: AssemblyDescription("Test Helpers for N2CMS. Extremly Alpha.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("N2 Contrib Team")]
 [assembly: AssemblyProduct("N2Contrib.TestHelper")]

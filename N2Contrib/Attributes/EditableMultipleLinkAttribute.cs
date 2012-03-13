@@ -13,7 +13,8 @@ namespace N2Contrib.Attributes
     ///		[EditableMultipleLink("Feed items", 90)]
     ///		public virtual ContentItem Feeds { get; set; }
     /// </example>
-    public class EditableMultipleLinkAttribute : AbstractEditableAttribute
+    [AttributeUsage(AttributeTargets.Property)]
+    public class EditableMultipleLinkAttribute : AbstractEditableAttribute, IRelativityTransformer
     {
         public EditableMultipleLinkAttribute() : this(null, 100)
 		{}
@@ -35,5 +36,12 @@ namespace N2Contrib.Attributes
         {
             throw new NotImplementedException();
         }
+
+        public string Rebase(string value, string fromAppPath, string toAppPath)
+        {
+            return null;
+        }
+
+        public RelativityMode RelativeWhen { get; set; }
     }
 }

@@ -31,7 +31,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RestorePackages>true</RestorePackages>
     <BuildPackage>true</BuildPackage>
     <PushPackage>false</PushPackage>
   </PropertyGroup>
