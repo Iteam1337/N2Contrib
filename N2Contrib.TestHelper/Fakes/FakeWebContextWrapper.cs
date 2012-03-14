@@ -1,7 +1,7 @@
 using System.Security.Principal;
 using System;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	/// <summary>
     /// A wrapper for static web methods.

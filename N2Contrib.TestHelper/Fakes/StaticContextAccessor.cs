@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using N2.Web;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class StaticContextAccessor : IRequestContextAccessor
 	{

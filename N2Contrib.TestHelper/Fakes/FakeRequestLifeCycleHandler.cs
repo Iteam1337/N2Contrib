@@ -3,7 +3,7 @@ using N2.Configuration;
 using N2.Engine;
 using N2.Web;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeRequestLifeCycleHandler : RequestLifeCycleHandler
 	{

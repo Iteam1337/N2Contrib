@@ -1,6 +1,7 @@
 using System;
+using N2;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeIntegrityManager : N2.Integrity.IIntegrityManager
 	{

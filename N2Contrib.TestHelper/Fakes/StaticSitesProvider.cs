@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using N2.Web;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class StaticSitesProvider : ISitesProvider
 	{

@@ -3,7 +3,7 @@ using N2.Persistence.NH;
 using N2.Web;
 using NHibernate;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeSessionProvider : SessionProvider, IDisposable
 	{

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Web;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeHttpSessionState : HttpSessionStateBase
 	{

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using N2.Web.Mvc;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeHttpServerUtility : HttpServerUtilityBase
 	{

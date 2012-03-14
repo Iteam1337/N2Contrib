@@ -11,7 +11,7 @@ using N2.Engine;
 using N2.Persistence;
 using N2.Persistence.NH;
 using N2.Security;
-using N2.Tests.Fakes;
+using N2Contrib.TestHelper.Fakes;
 using N2.Web.Mvc;
 using N2.Web;
 
@@ -54,6 +54,7 @@ namespace N2Contrib.TestHelper
 			engine.AddComponent<IPersister>(new ContentPersister(new FakeRepository<ContentItem>(), new FakeRepository<ContentDetail>()));
 			engine.AddComponent<ISecurityManager>(new FakeSecurityManager());
 			engine.AddComponent<IDefinitionManager>(new DefinitionManager(new IDefinitionProvider[0], new ITemplateProvider[0], new ContentActivator(new N2.Edit.Workflow.StateChanger(), null, new N2.Persistence.Proxying.EmptyProxyFactory()), new N2.Edit.Workflow.StateChanger()));
+            engine.AddComponent<IUrlParser>(new FakeUrlParser());
 			return engine;
 		}
 

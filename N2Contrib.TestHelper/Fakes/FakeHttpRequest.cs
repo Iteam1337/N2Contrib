@@ -2,7 +2,7 @@ using System;
 using System.Collections.Specialized;
 using System.Web;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeHttpRequest : HttpRequestBase
 	{

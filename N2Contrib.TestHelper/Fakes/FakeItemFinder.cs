@@ -4,8 +4,9 @@ using System.Linq;
 using N2.Definitions.Static;
 using N2.Persistence.Finder;
 using N2.Persistence.NH.Finder;
+using N2;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeItemFinder : IItemFinder
 	{

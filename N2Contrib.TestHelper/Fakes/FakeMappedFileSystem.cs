@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using N2.Edit.FileSystem;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeMappedFileSystem : MappedFileSystem
 	{

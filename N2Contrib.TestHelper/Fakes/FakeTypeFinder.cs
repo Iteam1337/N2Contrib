@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using N2.Engine;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeTypeFinder : ITypeFinder
 	{

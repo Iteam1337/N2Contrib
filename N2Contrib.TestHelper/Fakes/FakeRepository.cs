@@ -4,7 +4,7 @@ using System.Linq;
 using N2.Persistence;
 using N2.Persistence.NH;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	//public class FakeRepository<TEntity> : FakeRepository<int, TEntity> where TEntity : class
 	//{
@@ -153,7 +153,13 @@ namespace N2.Tests.Fakes
 			}
 
 			#endregion
-		}
+
+            public event EventHandler Committed;
+
+            public event EventHandler Disposed;
+
+            public event EventHandler Rollbacked;
+        }
 
 		public ITransaction BeginTransaction()
 		{
@@ -262,5 +268,9 @@ namespace N2.Tests.Fakes
 
 		#endregion
 
-	}
+        public ITransaction GetTransaction()
+        {
+            return null;
+        }
+    }
 }

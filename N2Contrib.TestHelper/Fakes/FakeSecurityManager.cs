@@ -2,8 +2,9 @@
 using System.Security.Principal;
 using N2.Collections;
 using N2.Security;
+using N2;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeSecurityManager : ISecurityManager
 	{

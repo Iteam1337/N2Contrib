@@ -4,7 +4,7 @@ using System.Linq;
 using N2.Edit.FileSystem;
 using System.IO;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeMemoryFileSystem : IFileSystem
 	{

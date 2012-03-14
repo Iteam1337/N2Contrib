@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using N2.Engine;
 using N2.Persistence;
+using N2;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeDependencyInjector : IDependencyInjector
 	{

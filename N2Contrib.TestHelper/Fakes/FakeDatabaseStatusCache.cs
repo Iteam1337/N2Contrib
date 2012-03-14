@@ -1,6 +1,6 @@
 ﻿using N2.Edit.Installation;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeDatabaseStatusCache : DatabaseStatusCache
 	{

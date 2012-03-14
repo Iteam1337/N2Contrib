@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace N2.Tests.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
 	/// <summary>
 	/// Fakes the time from N2.Utility.CurrentTime
