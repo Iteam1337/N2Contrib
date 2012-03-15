@@ -34,6 +34,8 @@ namespace N2Contrib.Attributes
         /// <returns></returns>
         protected override Control AddEditor(Control container)
         {
+            container.Page.ClientScript.RegisterClientScriptResource(this.GetType(), "N2Contrib.EditableMultipleLink.js");
+
             // Add a placeholder to wrap our controls
             var holder = new PlaceHolder();
             holder.ID = Name;

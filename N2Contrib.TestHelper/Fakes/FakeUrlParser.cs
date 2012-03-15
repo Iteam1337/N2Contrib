@@ -2,7 +2,7 @@
 using N2.Web;
 using N2;
 
-namespace N2Contib.TestHelper.Fakes
+namespace N2Contrib.TestHelper.Fakes
 {
     public class FakeUrlParser : IUrlParser
     {
@@ -55,7 +55,7 @@ namespace N2Contib.TestHelper.Fakes
 
         public PathData ResolvePath(Url url, ContentItem startNode = null, string remainingPath = null)
         {
-            throw new NotImplementedException();
+            return new PathData();
         }
 
         public ContentItem Parse(string url)

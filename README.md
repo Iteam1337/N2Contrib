@@ -4,18 +4,11 @@ N2 Contrib is useful for developers looking to develop web applications built wi
 
 The project is separated in several different modules that can be used independently.
 
-## N2 Contrib
+## N2Contrib
 
-### Attributes
+## N2Contrib.TestHelper
+This libraries contains helpers to aid you in the process of testing applications using [N2CMS][]
 
-## N2 Contrib TestHelper
-This libraries contains helpers to aid you in the process of testing [N2CMS][]
-
-## Quick Start
-1. Clone the repository.
-<pre>
-git clone git@github.com:24hr/N2Contrib.git 
-</pre>
-
+## N2Contrib.TestHelper.Mvc3
 
 [N2CMS]: https://github.com/n2cms/n2cms 

@@ -69,15 +69,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
-    <Folder Include="N2Contrib\Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="N2Contrib.nuspec" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="N2Contrib\Scripts\EditableMultipleLinkAttribute.js" />
+    <EmbeddedResource Include="N2Contrib\Scripts\EditableMultipleLink.js" />
     <Content Include="N2\history.txt" />
     <Content Include="N2\howto_develop.txt" />
     <Content Include="N2\howto_install.txt" />

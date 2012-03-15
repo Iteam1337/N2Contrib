@@ -91,54 +91,6 @@ namespace N2Contrib.TestHelper
 			return CreateContentItem(contentType, name, children);
 		}
 
-		#region class FakeUrlParser
-
-		public class FakeUrlParser : IUrlParser
-		{
-			public string BuildUrl(ContentItem item)
-			{
-				string url = "";
-				for (var current = item; current.Parent != null; current = current.Parent)
-				{
-					url += "/" + item.Name;
-				}
-				return url;
-			}
-
-			public ContentItem CurrentPage
-			{
-				get { throw new NotImplementedException(); }
-			}
-
-			public bool IsRootOrStartPage(ContentItem item)
-			{
-				throw new NotImplementedException();
-			}
-
-			public event EventHandler<PageNotFoundEventArgs> PageNotFound;
-
-			public ContentItem Parse(string url)
-			{
-				throw new NotImplementedException();
-			}
-
-			public PathData ResolvePath(Url url, ContentItem startNode = null, string remainingPath = null)
-			{
-				throw new NotImplementedException();
-			}
-
-			public ContentItem StartPage
-			{
-				get { throw new NotImplementedException(); }
-			}
-
-			public string StripDefaultDocument(string path)
-			{
-				throw new NotImplementedException();
-			}
-		}
-		#endregion
-
 		public static ContentItem CreateContentItem(Type contentType, string name, params ContentItem[] children) 
         {
             var item = (ContentItem)Activator.CreateInstance(contentType);
