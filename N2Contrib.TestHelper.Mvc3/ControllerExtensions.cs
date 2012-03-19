@@ -20,7 +20,7 @@ namespace N2Contrib.TestHelper
     /// <summary>
     /// Extensions for the Test Controller Builder 
     /// </summary>
-    public static class TestControllerBuilderExtensions
+    public static class ControllerExtensions
     {
 		/// <summary>
 		/// Initializes a Content Controller setting controller context (unless it has been already set), engine and current item.
@@ -35,6 +35,23 @@ namespace N2Contrib.TestHelper
 			Utility.SetProperty(controller, "CurrentPage", item);
 			return controller;
 		}
+
+        /// <summary>
+        /// Sets the Current Item of the Controller and returns the Controller
+        /// to continue the fluent chain.
+        /// </summary>
+        /// <typeparam name="TController"></typeparam>
+        /// <typeparam name="TContentItem"></typeparam>
+        /// <param name="controller"></param>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        public static TController SetCurrentItem<TController, TContentItem>(this TController controller, Func<TContentItem> func)
+            where TController : ContentController<TContentItem>
+            where TContentItem : ContentItem, new()
+        {
+            controller.CurrentItem = func();
+            return controller;
+        }
 
         /// <summary>
         /// Initializes a Content Controller setting controller context (unless it has been already set), engine and current item.
