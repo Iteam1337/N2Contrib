@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using N2;
 
-namespace N2Contrib.Tests.TestHelper.Mvc3.Fakes
+namespace N2Contrib.TestHelper
 {
-    public class FooPage : ContentItem
+    public class ContentItemExtensions
     {
     }
 }

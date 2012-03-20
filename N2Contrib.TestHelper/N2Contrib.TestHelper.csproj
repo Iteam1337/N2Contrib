@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentItemExtensions.cs" />
     <Compile Include="Fakes\FakeDatabaseStatusCache.cs" />
     <Compile Include="Fakes\FakeDependencyInjector.cs" />
     <Compile Include="Fakes\FakeDescendantItemFinder.cs" />

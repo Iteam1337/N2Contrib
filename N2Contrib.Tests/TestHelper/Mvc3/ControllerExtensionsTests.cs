@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using N2Contrib.Tests.TestHelper.Mvc3.Fakes;
 using N2Contrib.TestHelper;
 using FluentAssertions;
 using Xunit;
+using N2Contrib.Tests.TestHelper.Fakes;
 
 namespace N2Contrib.Tests.TestHelper.Mvc3
 {
