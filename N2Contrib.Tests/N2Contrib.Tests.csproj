@@ -69,10 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestHelper\ContentItemExtensionsTests.cs" />
+    <Compile Include="TestHelper\Fakes\UnTypedContentController.cs" />
     <Compile Include="TestHelper\Mvc3\ControllerExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelper\Fakes\FooPage.cs" />
     <Compile Include="TestHelper\Fakes\FooPageController.cs" />
+    <Compile Include="TestHelper\Mvc3\RouteCollectionExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

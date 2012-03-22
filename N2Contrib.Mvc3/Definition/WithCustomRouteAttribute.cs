@@ -5,7 +5,7 @@ using System.Text;
 
 namespace N2Contrib.Mvc3.Definition
 {
-    public class WithCustomRouteAttribute
+    public class WithCustomRouteAttribute : Attribute
     {
         public WithCustomRouteAttribute(string name, string url, object defaults = null, object constaints = null)
         {

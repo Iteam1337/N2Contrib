@@ -30,26 +30,22 @@ namespace N2Contrib.TestHelper
 		{
 			AssignContext(controller);
 			Utility.SetProperty(controller, "Engine", CreateFakeEngine());
-			var item = controller.CreateContentItem(controller.GetType().BaseType.GetGenericArguments()[0], "item");
-			Utility.SetProperty(controller, "CurrentItem", item);
-			Utility.SetProperty(controller, "CurrentPage", item);
 			return controller;
 		}
 
         /// <summary>
-        /// Sets the Current Item of the Controller and returns the Controller
-        /// to continue the fluent chain.
+        /// Sets 
         /// </summary>
         /// <typeparam name="TController"></typeparam>
-        /// <typeparam name="TContentItem"></typeparam>
         /// <param name="controller"></param>
-        /// <param name="func"></param>
+        /// <param name="item"></param>
         /// <returns></returns>
-        public static TController SetCurrentItem<TController, TContentItem>(this TController controller, Func<TContentItem> func)
+        public static TController SetCurrentItem<TController, TContentItem>(this TController controller, TContentItem item)
             where TController : ContentController<TContentItem>
-            where TContentItem : ContentItem, new()
+            where TContentItem : ContentItem
         {
-            controller.CurrentItem = func();
+            controller.RouteData.ApplyCurrentItem(item, null);
+            controller.CurrentItem = item;
             return controller;
         }
 

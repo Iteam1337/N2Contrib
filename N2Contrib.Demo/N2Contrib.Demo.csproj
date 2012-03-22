@@ -500,6 +500,10 @@
     <None Include="App_Data\SampleContent.n2.xml.gz" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\N2Contrib.Mvc3\N2Contrib.Mvc3.csproj">
+      <Project>{D07F2908-5E9D-4E04-9D1D-98DA5F58A037}</Project>
+      <Name>N2Contrib.Mvc3</Name>
+    </ProjectReference>
     <ProjectReference Include="..\N2Contrib\N2Contrib.csproj">
       <Project>{94351595-B2C8-4404-A3D3-49E5DAA2E253}</Project>
       <Name>N2Contrib</Name>

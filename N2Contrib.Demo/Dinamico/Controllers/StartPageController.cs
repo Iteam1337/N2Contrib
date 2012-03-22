@@ -89,5 +89,10 @@ namespace Dinamico.Controllers
 
 			return Content("<ul>" + sb + "</ul>");
 		}
+
+        public ActionResolver ShowFoo(string foo, string bar)
+        {
+            return null;
+        }
 	}
 }
