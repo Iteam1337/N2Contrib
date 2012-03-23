@@ -8,12 +8,38 @@ using N2.Integrity;
 using N2.Persistence;
 using N2.Security;
 using N2.Web;
+using N2;
+using N2.Details;
+using N2.Persistence.NH;
 
 namespace N2Contrib.TestHelper.Fakes
 {
     public class FakeEngine : IEngine
     {
         public FakeServiceContainer container = new FakeServiceContainer();
+
+
+
+		public FakeEngine()
+		{
+			Fakes = new FakesCollection();
+
+			AddComponent<IUrlParser>(Fakes.UrlParser = new FakeUrlParser());
+			Fakes.FakeHttpContext = new FakeHttpContext();
+			AddComponent<IWebContext>(Fakes.WebContext = new FakeWebContextWrapper(Fakes.FakeHttpContext));
+			AddComponent<IRepository<ContentItem>>(Fakes.ContentItemRepository = new FakeRepository<ContentItem>());
+			AddComponent<IRepository<ContentDetail>>(Fakes.ContentDetailRepository = new FakeRepository<ContentDetail>());
+			AddComponent<IPersister>(new ContentPersister(Fakes.ContentItemRepository, Fakes.ContentDetailRepository));
+			AddComponent<ISecurityManager>(Fakes.SecurityManager = new FakeSecurityManager());
+			AddComponent<IErrorNotifier>(Fakes.ErrorHandler = new FakeErrorHandler());
+			var contentTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => typeof(ContentItem).IsAssignableFrom(t)).Where(t => !t.IsAbstract)).ToArray();
+			AddComponent<ITypeFinder>(Fakes.TypeFinder = new FakeTypeFinder(contentTypes));
+		}
+
+		private void AddComponent<TService>(TService instance)
+		{
+			Container.AddComponentInstance(instance.GetType().FullName, typeof(TService), instance);
+		}
 
         #region IEngine Members
 
@@ -134,6 +160,27 @@ namespace N2Contrib.TestHelper.Fakes
         }
 
         #endregion
+
+		public FakesCollection Fakes { get; set; }
+
+		public class FakesCollection
+		{
+			public FakeUrlParser UrlParser { get; set; }
+
+			public FakeWebContextWrapper WebContext { get; set; }
+
+			public FakeRepository<ContentItem> ContentItemRepository { get; set; }
+
+			public FakeRepository<ContentDetail> ContentDetailRepository { get; set; }
+
+			public FakeSecurityManager SecurityManager { get; set; }
+
+			public FakeErrorHandler ErrorHandler { get; set; }
+
+			public FakeHttpContext FakeHttpContext { get; set; }
+
+			public FakeTypeFinder TypeFinder { get; set; }
+		}
 
         public class FakeServiceContainer : IServiceContainer
         {

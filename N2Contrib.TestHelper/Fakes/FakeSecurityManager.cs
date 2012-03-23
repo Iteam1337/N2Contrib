@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Principal;
+using N2;
 using N2.Collections;
 using N2.Security;
-using N2;
 
 namespace N2Contrib.TestHelper.Fakes
 {
 	public class FakeSecurityManager : ISecurityManager
 	{
+		public Func<IPrincipal, ContentItem, bool> AuthorizationDelegate = (user, item) => true;
+
 		#region ISecurityManager Members
 
 		public bool IsEditor(System.Security.Principal.IPrincipal principal)
@@ -22,9 +25,7 @@ namespace N2Contrib.TestHelper.Fakes
 
 		public bool IsAuthorized(ContentItem item, System.Security.Principal.IPrincipal user)
 		{
-			if (user == null)
-				return item["Unaccessible"] == null;
-			return item.Name == user.Identity.Name;
+			return AuthorizationDelegate(user, item);
 		}
 
 		public bool IsPublished(ContentItem item)
@@ -38,22 +39,17 @@ namespace N2Contrib.TestHelper.Fakes
 
 		public bool IsAuthorized(System.Security.Principal.IPrincipal user, IEnumerable<string> roles)
 		{
-			foreach(string role in roles)
-				if(user.IsInRole(role))
-					return true;
-			return false;
+			return AuthorizationDelegate(user, null);
 		}
 
 		public bool IsAuthorized(IPrincipal user, Permission permission)
 		{
-			return user.Identity.Name == permission.ToString();
+			return AuthorizationDelegate(user, null);
 		}
 
 		public bool IsAuthorized(IPrincipal principal, ContentItem item, Permission permission)
 		{
-			if (principal == null)
-				return item["Unaccessible" + permission] == null;
-			return item.Name == principal.Identity.Name;
+			return AuthorizationDelegate(principal, item);
 		}
 
 		public void CopyPermissions(ContentItem source, ContentItem destination)
