@@ -65,6 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyVersion.cs">
+      <Link>AssemblyVersion.cs</Link>
+    </Compile>
     <Compile Include="ContentSubRouteOfT.cs" />
     <Compile Include="Definition\WithCustomRouteAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
