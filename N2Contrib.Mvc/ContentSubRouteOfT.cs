@@ -44,7 +44,8 @@ namespace N2Contrib.Mvc
 
 			segmentRegex = regexFactory.CreateExpression(url);
 
-            // create a map of known parameters of which those in only in url are required
+            // create a map of known parameters to this route
+			// those only in the url expression are required
             parameters = defaults as RouteValueDictionary 
 				?? new RouteValueDictionary(defaults);
             foreach(var g in segmentRegex.Match(url).Groups.OfType<Group>().Skip(1))
