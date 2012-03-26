@@ -40,9 +40,11 @@ namespace N2Contrib.TestHelper.Fakes
 
         public string BuildUrl(ContentItem item)
         {
-            Url url = "/" + item.Name + ".aspx";
-            foreach (ContentItem parent in N2.Find.EnumerateParents(item))
+            Url url = new Url("/");
+            foreach (ContentItem parent in N2.Find.EnumerateParents(item, null, true))
             {
+                if (true == parent["IsStartPage"] as bool?)
+                    return url;
                 url = url.PrependSegment(parent.Name);
             }
             return url;

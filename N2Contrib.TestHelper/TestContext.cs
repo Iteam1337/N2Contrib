@@ -13,6 +13,7 @@ using N2.Security;
 using N2.Definitions;
 using N2.Edit.Workflow;
 using N2.Persistence.Proxying;
+using System.Web.Routing;
 
 namespace N2Contrib.TestHelper
 {
@@ -20,15 +21,13 @@ namespace N2Contrib.TestHelper
     {
         public TestContext()
         {
-            HttpContext = new FakeHttpContext();
-            Engine = new FakeEngine();
-            SecurityManager = new FakeSecurityManager();
-            UrlParser = new FakeUrlParser();
+            Url.DefaultExtension = "";
 
-            AddComponentToEngine<IUrlParser>(UrlParser);
-            AddComponentToEngine<IPersister>(new ContentPersister(new FakeRepository<ContentItem>(), new FakeRepository<ContentDetail>()));
-            AddComponentToEngine<ISecurityManager>(SecurityManager);
-            AddComponentToEngine<IDefinitionManager>(new DefinitionManager(new IDefinitionProvider[0], new ITemplateProvider[0], new ContentActivator(new StateChanger(), null, new EmptyProxyFactory()), new StateChanger()));
+            Engine = new FakeEngine();
+            HttpContext = Engine.Fakes.FakeHttpContext;
+            SecurityManager = Engine.Fakes.SecurityManager;
+            UrlParser = Engine.Fakes.UrlParser;
+            RouteData = new RouteData();
         }
 
         public void AddComponentToEngine<T>(T implementation)
@@ -36,15 +35,40 @@ namespace N2Contrib.TestHelper
             Engine.Container.AddComponentInstance(implementation.GetType().Name, typeof(T), implementation);
         }
 
-        public ContentItem CurrentItem
-        {
-            get{ return null; }
-            set{}
-        }
-
         public FakeEngine Engine { get; set; }
         public FakeSecurityManager SecurityManager { get; set; }
         public FakeUrlParser UrlParser { get; set; }
         public FakeHttpContext HttpContext { get; set; }
+        public RouteData RouteData {get;set;}
+
+        public T CreateStructure<T>(string path)
+            where T: ContentItem, new()
+        {
+            var segments = path.Split(new []{'/'}, StringSplitOptions.RemoveEmptyEntries);
+            if (segments.Length == 0)
+            {
+                var startPage = CreateItem<T>("start");
+                startPage["IsStartPage"] = true;
+                Engine.Host.DefaultSite.StartPageID = startPage.ID;
+                return startPage;
+            }
+
+            var parent = CreateStructure<T>(string.Join("/", segments.Take(segments.Length - 1).ToArray()));
+
+            var item = CreateItem<T>(segments[segments.Length - 1]);
+            item.AddTo(parent);
+            return item;
+        }
+
+        private T CreateItem<T>(string name)
+            where T : ContentItem, new()
+        {
+            var item = new T();
+            item.Title = name;
+            item.Name = name;
+            ((N2.Engine.IInjectable<IUrlParser>)item).Set(Engine.UrlParser);
+            Engine.Persister.Save(item);
+            return item;
+        }
     }
 }

@@ -11,6 +11,8 @@ using N2.Web;
 using N2;
 using N2.Details;
 using N2.Persistence.NH;
+using N2.Edit.Workflow;
+using N2.Persistence.Proxying;
 
 namespace N2Contrib.TestHelper.Fakes
 {
@@ -34,6 +36,8 @@ namespace N2Contrib.TestHelper.Fakes
 			AddComponent<IErrorNotifier>(Fakes.ErrorHandler = new FakeErrorHandler());
 			var contentTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => typeof(ContentItem).IsAssignableFrom(t)).Where(t => !t.IsAbstract)).ToArray();
 			AddComponent<ITypeFinder>(Fakes.TypeFinder = new FakeTypeFinder(contentTypes));
+            AddComponent<IDefinitionManager>(Fakes.Definitions = new DefinitionManager(new IDefinitionProvider[0], new ITemplateProvider[0], new ContentActivator(new StateChanger(), null, new EmptyProxyFactory()), new StateChanger()));
+            AddComponent<IHost>(Fakes.Host = new Host(Fakes.WebContext, new N2.Configuration.HostSection{ Web = new N2.Configuration.WebElement { Extension = "" }}));
 		}
 
 		public void AddComponent<TService>(TService instance)
@@ -180,7 +184,11 @@ namespace N2Contrib.TestHelper.Fakes
 			public FakeHttpContext FakeHttpContext { get; set; }
 
 			public FakeTypeFinder TypeFinder { get; set; }
-		}
+
+            public DefinitionManager Definitions { get; set; }
+
+            public Host Host { get; set; }
+        }
 
         public class FakeServiceContainer : IServiceContainer
         {

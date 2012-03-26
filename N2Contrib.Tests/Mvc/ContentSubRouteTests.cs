@@ -8,7 +8,7 @@ using N2Contrib.TestHelper.Fakes;
 using N2.Web.Mvc;
 using FluentAssertions;
 
-namespace N2Contrib.Tests.Mvc3
+namespace N2Contrib.Tests.Mvc
 {
     public class ContentSubRouteTests
     {

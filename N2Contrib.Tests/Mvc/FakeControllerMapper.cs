@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using N2.Web.Mvc;
 
-namespace N2Contrib.Tests.Mvc3
+namespace N2Contrib.Tests.Mvc
 {
     public class FakeControllerMapper : IControllerMapper
     {
