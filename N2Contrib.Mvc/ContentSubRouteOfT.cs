@@ -9,6 +9,7 @@ using N2;
 using N2.Web.Mvc;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using N2Contrib.Mvc3;
 
 namespace N2Contrib
 {
@@ -24,8 +25,8 @@ namespace N2Contrib
         readonly IEngine engine;
         readonly IControllerMapper controllerMapper;
         readonly string url;
-        readonly static Regex regexFactory = new Regex("({[^}]*?}/*)", RegexOptions.Compiled);
         private RouteValueDictionary parameters;
+		readonly RouteUrlRegexFactory regexFactory = new RouteUrlRegexFactory();
 
         class Required
         {
@@ -38,15 +39,14 @@ namespace N2Contrib
         {
             this.engine = engine;
             this.url = url;
-            var urlPattern = regexFactory.Replace(url, (m) => "(?<" + m.Groups[1].Value.Trim('/', '{', '}') + ">[^/]+)?/*");
-            Debug.WriteLine("pattern " + urlPattern);
-            segmentRegex = new Regex(urlPattern, RegexOptions.Compiled);
+
+			segmentRegex = regexFactory.CreateExpression(url);
 
             // create a map of known parameters of which those in only in url are required
             parameters = new RouteValueDictionary(defaults);
             foreach(var g in segmentRegex.Match(url).Groups.OfType<Group>().Skip(1))
             {
-                var key = g.Value.Trim('/', '{', '}');
+				var key = regexFactory.ToKey(g.Value);
                 if (!parameters.ContainsKey(key))
                     parameters.Add(key, new Required());
             }
@@ -93,7 +93,7 @@ namespace N2Contrib
 
         public Regex segmentRegex { get; set; }
 
-        public RouteValueDictionary ParseValuesFromSubPath(string url)
+        public RouteValueDictionary GetRouteValues(string url)
         {
             var match = segmentRegex.Match(url);
             if(!match.Success)
