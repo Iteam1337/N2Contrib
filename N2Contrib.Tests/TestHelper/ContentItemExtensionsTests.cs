@@ -12,17 +12,6 @@ namespace N2Contrib.Tests.TestHelper
     public class ContentItemExtensionsTests
     {
         [Fact]
-        public void AddChild_works_as_expected()
-        {
-            FooPage page;
-            page = new FooPage()
-                .AddChild(new FooPage());
-
-            page.Should().NotBeNull();
-            page.Children.Count.Should().Be(1);
-        }
-
-        [Fact]
         public void AddChildren_works_as_expected()
         {
             FooPage parent, child1, child2, grandChild;

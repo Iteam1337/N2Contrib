@@ -1,11 +1,14 @@
 ﻿using System;
 using N2.Web;
 using N2;
+using System.Collections.Generic;
 
 namespace N2Contrib.TestHelper.Fakes
 {
     public class FakeUrlParser : IUrlParser
     {
+        Dictionary<string, PathData> Paths = new Dictionary<string,PathData>();
+
         public FakeUrlParser()
         {
             PageNotFound += delegate { };
@@ -57,7 +60,10 @@ namespace N2Contrib.TestHelper.Fakes
 
         public PathData ResolvePath(Url url, ContentItem startNode = null, string remainingPath = null)
         {
-            return new PathData();
+            if(Paths.ContainsKey(url.ToString()))
+                return Paths[url.ToString()];
+
+            return PathData.None(startNode, remainingPath);
         }
 
         public ContentItem Parse(string url)

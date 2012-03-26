@@ -14,16 +14,12 @@ namespace N2Contrib.TestHelper
             if (children == null)
                 throw new ArgumentNullException("children");
 
-            foreach (var child in children)
+            foreach (var child in children) 
+            {  
+                child.Parent = page;
                 page.Children.Add(child);
+            }
 
-            return page;
-        }
-
-        public static T AddChild<T>(this T page, ContentItem child)
-            where T : ContentItem
-        {
-            page.Children.Add(child);
             return page;
         }
     }

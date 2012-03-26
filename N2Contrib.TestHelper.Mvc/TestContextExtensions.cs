@@ -9,13 +9,27 @@ using N2;
 
 namespace N2Contrib.TestHelper
 {
+    /// <summary>
+    /// Extensions for the Test Context
+    /// </summary>
     public static class TestContextExtensions
     {
+        /// <summary>
+        /// Initializes a ContentController by setting a mocked Controller Context
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="controller"></param>
         public static void InitializeController(this TestContext context, ContentController controller)
         {
+            controller.Engine = context.Engine;
             controller.ControllerContext = new ControllerContext(new RequestContext(context.HttpContext, context.RouteData), controller);
         }
 
+        /// <summary>
+        /// Sets the Current Item
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="item"></param>
         public static void SetCurrentItem(this TestContext context, ContentItem item)
         {
             context.Engine.RequestContext.CurrentPath = new N2.Web.PathData(item, null);
