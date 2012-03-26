@@ -73,6 +73,7 @@
       <Link>AssemblyVersion.cs</Link>
     </Compile>
     <Compile Include="ControllerExtensions.cs" />
+    <Compile Include="Fakes\FakeControllerMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestContextExtensions.cs" />
   </ItemGroup>

@@ -6,6 +6,7 @@ using System.Web.Routing;
 using N2;
 using N2.Engine;
 using N2.Web.Mvc;
+using N2Contrib.Mvc;
 
 namespace N2Contrib
 {

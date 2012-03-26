@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Xunit;
-using N2;
-using N2Contrib.TestHelper.Fakes;
-using N2.Web.Mvc;
+﻿using System.Linq;
 using FluentAssertions;
+using N2;
+using N2.Web;
+using N2.Web.Mvc;
+using N2Contrib.Mvc;
+using N2Contrib.TestHelper.Fakes;
+using N2Contrib.TestHelper.Mvc.Fakes;
+using N2Contrib.Tests.TestHelper.Fakes;
+using Xunit;
 
 namespace N2Contrib.Tests.Mvc
 {
@@ -114,6 +115,43 @@ namespace N2Contrib.Tests.Mvc
 
 			values.Count.Should().Be(1);
 			values["hej"].Should().Be("hela/världen");
+		}
+
+		[Fact]
+		public void It_should_call_constraints()
+		{
+			engine.Fakes.UrlParser.Paths["/hello"] = PathData.None(new FooPage(), "hello");
+
+			bool wasCalled = false;
+			route = new ContentSubRoute<ContentItem>("x", engine, "{hello}", null, new { hello = new DelegateConstraint((v) => wasCalled = true) });
+
+			route.GetRouteData(new FakeHttpContext("/hello"));
+
+			wasCalled.Should().Be(true);
+		}
+
+		[Fact]
+		public void It_should_ignore_paths_not_matching_IRouteConstraint()
+		{
+			engine.Fakes.UrlParser.Paths["/world"] = PathData.None(new FooPage(), "world");
+
+			route = new ContentSubRoute<ContentItem>("x", engine, "{hello}", null, new { hello = new DelegateConstraint((v) => false) });
+
+			var data = route.GetRouteData(new FakeHttpContext("/world"));
+
+			data.Should().BeNull();
+		}
+
+		[Fact]
+		public void It_should_route_paths_matching_IRouteConstraint()
+		{
+			engine.Fakes.UrlParser.Paths["/world"] = PathData.None(new FooPage(), "world");
+
+			route = new ContentSubRoute<ContentItem>("x", engine, "{hello}", null, new { hello = new DelegateConstraint((v) => v == "world") });
+
+			var data = route.GetRouteData(new FakeHttpContext("/world"));
+
+			data.Values["hello"].Should().Be("world");
 		}
     }
 }
