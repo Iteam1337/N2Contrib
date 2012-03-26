@@ -36,7 +36,7 @@ namespace N2Contrib.TestHelper.Fakes
 			AddComponent<ITypeFinder>(Fakes.TypeFinder = new FakeTypeFinder(contentTypes));
 		}
 
-		private void AddComponent<TService>(TService instance)
+		public void AddComponent<TService>(TService instance)
 		{
 			Container.AddComponentInstance(instance.GetType().FullName, typeof(TService), instance);
 		}

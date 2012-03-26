@@ -54,17 +54,21 @@
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.2.9.2.2\lib\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="N2">
-      <HintPath>..\packages\N2CMS.2.2.3\lib\N2.dll</HintPath>
+    <Reference Include="N2, Version=2.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\N2CMS.Library.2.2.6\lib\N2.dll</HintPath>
     </Reference>
-    <Reference Include="N2.Extensions">
-      <HintPath>..\packages\N2CMS.2.2.3\lib\N2.Extensions.dll</HintPath>
+    <Reference Include="N2.Extensions, Version=2.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\N2CMS.2.2.6\lib\N2.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="N2.Management">
-      <HintPath>..\packages\N2CMS.2.2.3\lib\N2.Management.dll</HintPath>
+    <Reference Include="N2.Management, Version=2.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\N2CMS.2.2.6\lib\N2.Management.dll</HintPath>
     </Reference>
-    <Reference Include="N2.Packaging">
-      <HintPath>..\packages\N2CMS.2.2.3\lib\N2.Packaging.dll</HintPath>
+    <Reference Include="N2.Packaging, Version=2.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\N2CMS.2.2.6\lib\N2.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="N2.Razor">
       <HintPath>..\packages\N2CMS.Dinamico.2.2.3\lib\N2.Razor.dll</HintPath>
@@ -72,8 +76,8 @@
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.3.2.0.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate.Caches.SysCache2">
-      <HintPath>..\packages\N2CMS.2.2.3\lib\NHibernate.Caches.SysCache2.dll</HintPath>
+    <Reference Include="NHibernate.Caches.SysCache2, Version=3.2.0.3001, Culture=neutral, PublicKeyToken=6876f2ea66c9f443, processorArchitecture=MSIL">
+      <HintPath>..\packages\N2CMS.2.2.6\lib\NHibernate.Caches.SysCache2.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.SQLite">
       <HintPath>..\packages\System.Data.SQLite.1.0.79.0\lib\net40\System.Data.SQLite.dll</HintPath>
@@ -188,6 +192,11 @@
     <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="N2\history.txt" />
+    <Content Include="N2\howto_develop.txt" />
+    <Content Include="N2\howto_install.txt" />
+    <Content Include="N2\license.txt" />
+    <Content Include="N2\n2_readme.txt" />
     <Content Include="Scripts\jquery-1.5-vsdoc.js" />
     <Content Include="Scripts\jquery-1.5.js" />
     <Content Include="Scripts\jquery-1.5.min.js" />
@@ -261,15 +270,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="N2\web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="N2\N2.zip" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Data\n2_host.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dinamico\Themes\Web.config" />
@@ -497,12 +497,15 @@
     <Content Include="Dinamico\Themes\Cloudy\Views\Shared\LayoutPartials\Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\n2_host.config" />
     <None Include="App_Data\SampleContent.n2.xml.gz" />
+    <Content Include="N2\web.config" />
+    <Content Include="N2\N2.zip" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\N2Contrib.Mvc3\N2Contrib.Mvc3.csproj">
+    <ProjectReference Include="..\N2Contrib.Mvc\N2Contrib.Mvc.csproj">
       <Project>{D07F2908-5E9D-4E04-9D1D-98DA5F58A037}</Project>
-      <Name>N2Contrib.Mvc3</Name>
+      <Name>N2Contrib.Mvc</Name>
     </ProjectReference>
     <ProjectReference Include="..\N2Contrib\N2Contrib.csproj">
       <Project>{94351595-B2C8-4404-A3D3-49E5DAA2E253}</Project>

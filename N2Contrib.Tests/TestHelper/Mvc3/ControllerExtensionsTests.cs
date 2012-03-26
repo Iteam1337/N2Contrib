@@ -17,7 +17,6 @@ namespace N2Contrib.Tests.TestHelper.Mvc3
         public void InitializeContentController_sets_controller_contexts()
         {
             var controller = new FooPageController()
-                .InitializeContentController()
                 .ControllerContext.Should().NotBeNull();
         }
 
@@ -25,8 +24,7 @@ namespace N2Contrib.Tests.TestHelper.Mvc3
         public void SetCurrentItem_works_as_stated()
         {
             FooPage page = new FooPage();
-            var controller = new FooPageController()
-                .SetCurrentItem(page);
+            var controller = new FooPageController();
 
             controller.CurrentItem.Should().Be(page);
         }
@@ -35,9 +33,7 @@ namespace N2Contrib.Tests.TestHelper.Mvc3
         public void SetCurrentItem_works_for_un_typed_controllers()
         {
             var page = new FooPage();
-            var controller = new UnTypedContentController()
-                .SetCurrentItem<UnTypedContentController, ContentItem>(page);
-
+            var controller = new UnTypedContentController();
             controller.CurrentItem.Should().Be(page);
         }
     }

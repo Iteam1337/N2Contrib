@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <title>N2Contrib.Testhelper.Mvc3</title>
+    <version>$version$</version>
+    <authors>$author$</authors>
+    <description>$description$</description>
+    <language>en-US</language>
+    <dependencies>      <dependency id="N2CMS.Library" version="[2.2.5]" />
+      <dependency id="N2Contrib.TestHelper" version="[0.1.1.10]" />
+    </dependencies>
+    <projectUrl>https://github.com/24hr/N2Contrib.TestHelper</projectUrl>
+    <tags>N2 Testing Mvc</tags>
+  </metadata>
+</package>

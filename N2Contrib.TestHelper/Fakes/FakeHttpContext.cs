@@ -57,8 +57,8 @@ namespace N2Contrib.TestHelper.Fakes
 			request.rawUrl = filePath;
 			request.appRelativeCurrentExecutionFilePath = Url.ToRelative(filePath);
 		}
-		private System.Security.Principal.IPrincipal user = new GenericPrincipal(new GenericIdentity(""), new string[0]);
-		public override System.Security.Principal.IPrincipal User
+		private IPrincipal user = new GenericPrincipal(new GenericIdentity(""), new string[0]);
+		public override IPrincipal User
 		{
 			get { return user; }
 			set{ user = value; }

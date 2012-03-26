@@ -51,7 +51,12 @@ namespace Dinamico
 		public static void RegisterRoutes(RouteCollection routes, IEngine engine)
 		{
 			routes.MapContentRoute("Content", engine);
-            routes.MapContentSubRoute<StartPage>("StartPage", engine, "foo/{bar}", new { action = "ShowFoo" });
+            routes.MapContentSubRoute<StartPage>(
+                "someName",
+                engine,
+                "{property}/{other}",
+                new { action = "something", other = UrlParameter.Optional, controller = "" }
+            );
 		}
 
 		public static void RegisterViewEngines(ViewEngineCollection viewEngines)
