@@ -5,6 +5,7 @@ using N2.Web;
 using N2;
 using System.Web.Routing;
 using System.Collections.Generic;
+using N2.Web.Mvc;
 
 namespace N2Contrib.TestHelper
 {
@@ -25,6 +26,7 @@ namespace N2Contrib.TestHelper
             SecurityManager = Engine.Fakes.SecurityManager;
             UrlParser = Engine.Fakes.UrlParser;
             RouteData = new RouteData();
+            N2.Context.Replace(Engine);
         }
 
         /// <summary>

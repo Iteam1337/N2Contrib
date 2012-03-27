@@ -12,7 +12,7 @@ namespace N2Contrib.TestHelper
     /// <summary>
     /// Extensions for the Test Context
     /// </summary>
-    public static class TestContextExtensions
+    public static class N2TestContextExtensions
     {
         /// <summary>
         /// Initializes a ContentController by setting a mocked Controller Context
