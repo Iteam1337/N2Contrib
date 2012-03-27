@@ -26,10 +26,7 @@ namespace N2Contrib.TestHelper.Fakes
             get { throw new NotImplementedException(); }
         }
 
-        public ContentItem StartPage
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public ContentItem StartPage { get; set; }
 
         public ContentItem CurrentPage
         {

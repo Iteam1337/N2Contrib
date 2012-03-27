@@ -6,9 +6,20 @@ using N2;
 
 namespace N2Contrib.TestHelper
 {
+    /// <summary>
+    /// Extensions for Content Item
+    /// </summary>
     public static class ContentItemExtensions
     {
-        public static T AddChildren<T>(this T page, params ContentItem [] children)
+        /// <summary>
+        /// Adds the provided content items as children to 
+        /// this content item.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item"></param>
+        /// <param name="children"></param>
+        /// <returns></returns>
+        public static T AddChildren<T>(this T item, params ContentItem [] children)
             where T : ContentItem
         {
             if (children == null)
@@ -16,11 +27,11 @@ namespace N2Contrib.TestHelper
 
             foreach (var child in children) 
             {  
-                child.Parent = page;
-                page.Children.Add(child);
+                child.Parent = item;
+                item.Children.Add(child);
             }
 
-            return page;
+            return item;
         }
     }
 }

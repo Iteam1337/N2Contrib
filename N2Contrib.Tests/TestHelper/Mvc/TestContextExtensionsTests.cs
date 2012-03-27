@@ -11,12 +11,12 @@ namespace N2Contrib.Tests.TestHelper.Mvc
 {
     public class TestContextExtensionsTests
     {
-        private TestContext testContext;
+        private N2TestContext testContext;
         private FooPageController controller; 
 
         public TestContextExtensionsTests()
         {
-            testContext = new TestContext();
+            testContext = new N2TestContext();
             controller = new FooPageController();
         }
 

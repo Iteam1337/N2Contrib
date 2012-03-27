@@ -19,7 +19,7 @@ namespace N2Contrib.TestHelper
         /// </summary>
         /// <param name="context"></param>
         /// <param name="controller"></param>
-        public static void InitializeController(this TestContext context, ContentController controller)
+        public static void InitializeController(this N2TestContext context, ContentController controller)
         {
             controller.Engine = context.Engine;
             controller.ControllerContext = new ControllerContext(new RequestContext(context.HttpContext, context.RouteData), controller);
@@ -30,7 +30,7 @@ namespace N2Contrib.TestHelper
         /// </summary>
         /// <param name="context"></param>
         /// <param name="item"></param>
-        public static void SetCurrentItem(this TestContext context, ContentItem item)
+        public static void SetCurrentItem(this N2TestContext context, ContentItem item)
         {
             context.Engine.RequestContext.CurrentPath = new N2.Web.PathData(item, null);
             context.RouteData.DataTokens["item"] = item;
