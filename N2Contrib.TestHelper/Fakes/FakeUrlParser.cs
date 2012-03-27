@@ -7,7 +7,7 @@ namespace N2Contrib.TestHelper.Fakes
 {
     public class FakeUrlParser : IUrlParser
     {
-        Dictionary<string, PathData> Paths = new Dictionary<string,PathData>();
+        public Dictionary<string, PathData> Paths = new Dictionary<string,PathData>();
 
         public FakeUrlParser()
         {

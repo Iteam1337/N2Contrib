@@ -8,8 +8,8 @@
     <ProjectGuid>{D07F2908-5E9D-4E04-9D1D-98DA5F58A037}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>N2Contrib.Mvc3</RootNamespace>
-    <AssemblyName>N2Contrib.Mvc3</AssemblyName>
+    <RootNamespace>N2Contrib.Mvc</RootNamespace>
+    <AssemblyName>N2Contrib.Mvc</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\N2Contrib\</SolutionDir>
@@ -70,8 +70,11 @@
       <Link>AssemblyVersion.cs</Link>
     </Compile>
     <Compile Include="ContentSubRouteOfT.cs" />
+    <Compile Include="DelegateConstraint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegexConstraint.cs" />
     <Compile Include="RouteCollectionExtensions.cs" />
+    <Compile Include="RouteUrlRegexFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
