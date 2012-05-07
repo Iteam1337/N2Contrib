@@ -5,7 +5,6 @@ using N2.Web;
 using N2;
 using System.Web.Routing;
 using System.Collections.Generic;
-using N2.Web.Mvc;
 
 namespace N2Contrib.TestHelper
 {
@@ -59,7 +58,6 @@ namespace N2Contrib.TestHelper
             }
 
             var parent = CreateStructure<T>(string.Join("/", segments.Take(segments.Length - 1).ToArray()));
-
             var item = CreateItem<T>(segments[segments.Length - 1]);
             item.AddTo(parent);
             return item;

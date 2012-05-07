@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using System.Web;
+using System.Linq;
 
 namespace N2Contrib.TestHelper.Fakes
 {
@@ -8,6 +9,7 @@ namespace N2Contrib.TestHelper.Fakes
 	{
 		public string appRelativeCurrentExecutionFilePath = "~/";
 		public NameValueCollection query = new NameValueCollection();
+		public NameValueCollection param = new NameValueCollection();
 		public string rawUrl = "/";
 
 		public override System.Uri Url
@@ -37,6 +39,11 @@ namespace N2Contrib.TestHelper.Fakes
 		public override NameValueCollection QueryString
 		{
 			get { return query; }
+		}
+
+		public override NameValueCollection Params
+		{
+			get { return param; }
 		}
 
 		public override string PhysicalPath
