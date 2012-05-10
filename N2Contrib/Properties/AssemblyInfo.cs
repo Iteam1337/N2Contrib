@@ -7,9 +7,9 @@ using System.Web.UI;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("N2Contrib")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("N2Contrib contains attributes, cacheservice etc for N2Cms, check project site for more info")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("N2Contrib Contributors")]
 [assembly: AssemblyProduct("N2Contrib")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
@@ -22,19 +22,3 @@ using System.Web.UI;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("efbf6664-9185-4cd1-9290-2c11dd51c969")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.1.10")]
-[assembly: AssemblyFileVersion("0.1.1.10")]
-
-// Embedded Resources
-[assembly: WebResource("N2Contrib.EditableMultipleLink.js", "application/x-javascript")]

@@ -161,6 +161,10 @@ namespace N2Contrib.Mvc
                 else
                     values[key] = parameters[key];
             }
+			if (!values.ContainsKey("controller"))
+			{
+				values["controller"] = controllerMapper.GetControllerName(typeof(T));
+			}
             return values;
         }
 

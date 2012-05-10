@@ -2,13 +2,13 @@
 <package>
   <metadata>
     <id>$id$</id>
-    <title>N2Contrib</title>
+    <title>N2Contrib.Mvc</title>
     <version>$version$</version>
     <authors>$author$</authors>
     <description>$description$</description>
     <language>en-US</language>
     <dependencies>
-      <dependency id="N2CMS.Library" version="2.2.5" />
+      <dependency id="N2Contrib" version="[$version$]" />
     </dependencies>
     <projectUrl>https://github.com/24hr/N2Contrib</projectUrl>
     <tags>N2 Contrib</tags>

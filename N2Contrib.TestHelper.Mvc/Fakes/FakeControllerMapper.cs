@@ -8,14 +8,20 @@ namespace N2Contrib.TestHelper.Mvc.Fakes
 {
     public class FakeControllerMapper : IControllerMapper
     {
+		public Func<string, string, bool> HasActionFunc;
+
         public bool ControllerHasAction(string controllerName, string actionName)
         {
-            throw new NotImplementedException();
+			if (HasActionFunc == null)
+				throw new NotImplementedException("Set the HasActionFunc");
+            return HasActionFunc(controllerName, actionName);
         }
 
+		public string controllerName;
+
         public string GetControllerName(Type type)
-        {
-            throw new NotImplementedException();
+	    {
+            return controllerName;
         }
     }
 }

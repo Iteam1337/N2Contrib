@@ -30,9 +30,6 @@ namespace Dinamico.Models
 	[WithEditableTemplateSelection(ContainerName = Defaults.Containers.Metadata)]
 	public class StartPage : ContentPage, IStartPage, IStructuralPage, IThemeable, ILanguage, ISitesSource
 	{
-        [EditableMultipleLink]
-        public virtual IEnumerable<ContentItem> Links { get; set; }
-
 		#region IThemeable Members
 
 		[EditableThemeSelection(EnablePreview = true, ContainerName = Defaults.Containers.Site)]

@@ -8,7 +8,8 @@
     <description>$description$</description>
     <language>en-US</language>
     <dependencies>
-      <dependency id="N2CMS" version="2.2.3" />
+      <dependency id="N2CMS.Library" version="2.2.6" />
+			<dependency id="WebActivator" version="1.5" />
     </dependencies>
     <projectUrl>https://github.com/24hr/N2Contrib</projectUrl>
     <tags>N2 Contrib</tags>

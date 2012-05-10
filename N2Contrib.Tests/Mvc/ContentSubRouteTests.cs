@@ -14,12 +14,15 @@ namespace N2Contrib.Tests.Mvc
     public class ContentSubRouteTests
     {
         private ContentSubRoute<ContentItem> route;
+		private FakeControllerMapper controllerMapper;
         private FakeEngine engine;
 
         public ContentSubRouteTests()
         {
             engine = new FakeEngine();
-            engine.AddComponent<IControllerMapper>(new FakeControllerMapper());
+			controllerMapper = new FakeControllerMapper();
+			controllerMapper.controllerName = "Foo";
+            engine.AddComponent<IControllerMapper>(controllerMapper);
             route = new ContentSubRoute<ContentItem>("x", engine, "{hello}", new { hello = "world" }, null);
         }
 
@@ -28,17 +31,31 @@ namespace N2Contrib.Tests.Mvc
         {
             var values = route.GetRouteValues("universe");
 
-            values.Keys.Single().Should().Be("hello");
-            values.Values.Single().Should().Be("universe");
+			values.ContainsKey("hello").Should().BeTrue();
+            values["hello"].ToString().Should().Be("universe");
         }
+
+		[Fact]
+		public void It_should_set_controller_from_controller_mapper()
+		{
+			var values = route.GetRouteValues("");
+			values["controller"].Should().Be("foo");
+		}
+
+		public void It_should_allow_custom_controller()
+		{
+			route = new ContentSubRoute<ContentItem>("x", engine, "{hello}", new { controller= "Bar", hello = "world" }, null);
+			var values = route.GetRouteValues("");
+			values["controller"].Should().Be("Bar");
+		}
 
         [Fact]
 		public void It_should_give_route_defaults_for_empty_path_when_using_defaults()
         {
             var values = route.GetRouteValues("");
 
-			values.Keys.Single().Should().Be("hello");
-			values.Values.Single().Should().Be("world");
+			values.ContainsKey("hello").Should().BeTrue();
+			values["hello"].ToString().Should().Be("world");
         }
 
 		[Fact]
@@ -68,7 +85,8 @@ namespace N2Contrib.Tests.Mvc
             
             var values = route.GetRouteValues("sverige");
 
-            values.Count.Should().Be(2);
+            values.Count.Should().Be(3);
+			values["controller"].Should().Be("Foo");
             values["hello"].Should().Be("sverige");
             values["hej"].Should().Be("världen");
         }
@@ -80,7 +98,7 @@ namespace N2Contrib.Tests.Mvc
 
 			var values = route.GetRouteValues("sverige/wow");
 
-			values.Count.Should().Be(2);
+			values.Count.Should().Be(3);
 			values["hello"].Should().Be("sverige");
 			values["hej"].Should().Be("wow");
 		}
@@ -92,7 +110,7 @@ namespace N2Contrib.Tests.Mvc
 
 			var values = route.GetRouteValues("hello/världen");
 
-			values.Count.Should().Be(1);
+			values.Count.Should().Be(2);
 			values["hej"].Should().Be("världen");
 		}
 
@@ -103,7 +121,7 @@ namespace N2Contrib.Tests.Mvc
 
 			var values = route.GetRouteValues("HELLO/världen");
 
-			values.Count.Should().Be(1);
+			values.Count.Should().Be(2);
 		}
 
 		[Fact]
@@ -113,7 +131,7 @@ namespace N2Contrib.Tests.Mvc
 
 			var values = route.GetRouteValues("hela/världen");
 
-			values.Count.Should().Be(1);
+			values.Count.Should().Be(2);
 			values["hej"].Should().Be("hela/världen");
 		}
 
