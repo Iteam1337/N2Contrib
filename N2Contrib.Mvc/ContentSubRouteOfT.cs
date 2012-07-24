@@ -10,6 +10,7 @@ using N2.Web.Mvc;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Web.Mvc;
+using N2.Edit.Installation;
 
 namespace N2Contrib.Mvc
 {
@@ -46,8 +47,8 @@ namespace N2Contrib.Mvc
 
             // create a map of known parameters to this route
 			// those only in the url expression are required
-            parameters = defaults as RouteValueDictionary 
-				?? new RouteValueDictionary(defaults);
+            parameters = defaults as RouteValueDictionary ?? new RouteValueDictionary(defaults);
+
             foreach(var g in segmentRegex.Match(url).Groups.OfType<Group>().Skip(1))
             {
 				var key = regexFactory.ToKey(g.Value);
@@ -86,6 +87,9 @@ namespace N2Contrib.Mvc
         /// <returns></returns>
         public override RouteData GetRouteData(HttpContextBase httpContext)
         {
+			if (!engine.Resolve<InstallationManager>().GetStatus().IsInstalled)
+				return null;
+
             var path = engine.UrlParser.ResolvePath(httpContext.Request.Url.PathAndQuery);
             
             // No content route was found check for stopitem
