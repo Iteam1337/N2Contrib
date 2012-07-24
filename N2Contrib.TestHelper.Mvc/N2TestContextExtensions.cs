@@ -6,6 +6,7 @@ using N2.Web.Mvc;
 using System.Web.Mvc;
 using System.Web.Routing;
 using N2;
+using N2.Web;
 
 namespace N2Contrib.TestHelper
 {
@@ -32,7 +33,7 @@ namespace N2Contrib.TestHelper
         /// <param name="item"></param>
         public static void SetCurrentItem(this N2TestContext context, ContentItem item)
         {
-            context.Engine.RequestContext.CurrentPath = new N2.Web.PathData(item, null);
+            context.Engine.RequestContext.CurrentPath = new PathData(item, null);
             context.RouteData.DataTokens["item"] = item;
             context.RouteData.ApplyCurrentItem(item, null);
         }

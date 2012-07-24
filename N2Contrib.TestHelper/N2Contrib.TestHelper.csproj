@@ -68,9 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AssemblyVersion.cs">
-      <Link>AssemblyVersion.cs</Link>
-    </Compile>
+    <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="ContentItemExtensions.cs" />
     <Compile Include="Fakes\FakeDatabaseStatusCache.cs" />
     <Compile Include="Fakes\FakeDependencyInjector.cs" />
