@@ -13,6 +13,7 @@ using N2.Details;
 using N2.Persistence.NH;
 using N2.Edit.Workflow;
 using N2.Persistence.Proxying;
+using N2.Edit.FileSystem;
 
 namespace N2Contrib.TestHelper.Fakes
 {
@@ -33,6 +34,7 @@ namespace N2Contrib.TestHelper.Fakes
 			AddComponent<IRepository<ContentDetail>>(Fakes.ContentDetailRepository = new FakeRepository<ContentDetail>());
 			AddComponent<IPersister>(new ContentPersister(Fakes.ContentItemRepository, Fakes.ContentDetailRepository));
 			AddComponent<ISecurityManager>(Fakes.SecurityManager = new FakeSecurityManager());
+			AddComponent<IFileSystem>(Fakes.FakeFileSystem = new FakeMemoryFileSystem());
 			AddComponent<IErrorNotifier>(Fakes.ErrorHandler = new FakeErrorHandler());
 			var contentTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => typeof(ContentItem).IsAssignableFrom(t)).Where(t => !t.IsAbstract)).ToArray();
 			AddComponent<ITypeFinder>(Fakes.TypeFinder = new FakeTypeFinder(contentTypes));
@@ -188,7 +190,9 @@ namespace N2Contrib.TestHelper.Fakes
             public DefinitionManager Definitions { get; set; }
 
             public Host Host { get; set; }
-        }
+
+			public FakeMemoryFileSystem FakeFileSystem { get; set; }
+		}
 
         public class FakeServiceContainer : IServiceContainer
         {
