@@ -71,7 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mvc\ContentSubRouteTests.cs" />
+    <Compile Include="Mvc\Routing\ContentSubRouteTests.cs" />
     <Compile Include="TestHelper\ContentItemExtensionsTests.cs" />
     <Compile Include="TestHelper\Fakes\UnTypedContentController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

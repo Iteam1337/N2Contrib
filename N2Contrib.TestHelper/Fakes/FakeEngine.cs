@@ -14,6 +14,7 @@ using N2.Persistence.NH;
 using N2.Edit.Workflow;
 using N2.Persistence.Proxying;
 using N2.Edit.FileSystem;
+using N2.Plugin;
 
 namespace N2Contrib.TestHelper.Fakes
 {
@@ -40,6 +41,7 @@ namespace N2Contrib.TestHelper.Fakes
 			AddComponent<ITypeFinder>(Fakes.TypeFinder = new FakeTypeFinder(contentTypes));
             AddComponent<IDefinitionManager>(Fakes.Definitions = new DefinitionManager(new IDefinitionProvider[0], new ITemplateProvider[0], new ContentActivator(new StateChanger(), null, new EmptyProxyFactory()), new StateChanger()));
             AddComponent<IHost>(Fakes.Host = new Host(Fakes.WebContext, new N2.Configuration.HostSection{ Web = new N2.Configuration.WebElement { Extension = "" }}));
+			AddComponent<ConnectionMonitor>(Fakes.FakeConnectionMonitor = new FakeConnectionMonitor());
 		}
 
 		public void AddComponent<TService>(TService instance)
@@ -192,6 +194,8 @@ namespace N2Contrib.TestHelper.Fakes
             public Host Host { get; set; }
 
 			public FakeMemoryFileSystem FakeFileSystem { get; set; }
+
+			public FakeConnectionMonitor FakeConnectionMonitor { get; set; }
 		}
 
         public class FakeServiceContainer : IServiceContainer
