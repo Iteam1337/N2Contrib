@@ -64,19 +64,38 @@ namespace N2Contrib.TestHelper
         }
 
         /// <summary>
-        /// 
+        /// Helper method that creates an item and stores it in the faked 
+		/// underlying storage.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="name"></param>
-        /// <returns></returns>
-        public T CreateItem<T>(string name) where T : ContentItem, new()
+		/// <param name="startpage"></param>
+		/// <param name="setters"></param>
+        /// <returns>the newly created item</returns>
+        public T CreateItem<T>(string name, bool isStartPage = false, params Action<T>[] setters) where T : ContentItem, new()
         {
+			// Create the new Content Item
             var item = new T();
+
+			// Set the mandatory properties
             item.Title = name;
             item.Name = name;
+
+			// Set the internal start page flag
+			if (isStartPage)
+				item["IsStartPage"] = true;
+			
+			// Any provided custom setters?
+			foreach (var setter in setters)
+				setter(item);
+
+			// Set a fake url parser
             ((N2.Engine.IInjectable<IUrlParser>)item).Set(Engine.UrlParser);
+
+			// Persist it in the fake persister
             Engine.Persister.Save(item);
-            return item;
+            
+			return item;
         }
 
         /// <summary>

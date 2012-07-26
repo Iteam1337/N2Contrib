@@ -78,6 +78,7 @@
     <Compile Include="TestHelper\Fakes\FooPage.cs" />
     <Compile Include="TestHelper\Fakes\FooPageController.cs" />
     <Compile Include="TestHelper\Mvc\TestContextExtensionsTests.cs" />
+    <Compile Include="TestHelper\N2TestContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
