@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web.Routing;
 using N2;
 using N2.Engine;
 using N2.Web.Mvc;
-using N2Contrib.Mvc;
+using N2Contrib.Mvc.Routing;
 
 namespace N2Contrib
 {

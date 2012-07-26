@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fakes\FakeConnectionMonitor.cs" />
     <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="ContentItemExtensions.cs" />
     <Compile Include="Fakes\FakeDatabaseStatusCache.cs" />

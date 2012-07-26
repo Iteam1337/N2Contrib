@@ -11,14 +11,12 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Web.Mvc;
 using N2.Edit.Installation;
+using N2.Plugin;
 
-namespace N2Contrib.Mvc
+namespace N2Contrib.Mvc.Routing
 {
     /// <summary>
     /// A SubRoute to a Content Route
-    /// <remarks>
-    /// 
-    /// </remarks>
     /// </summary>
     public class ContentSubRoute<T> : RouteBase
         where T : ContentItem
@@ -30,10 +28,10 @@ namespace N2Contrib.Mvc
 		readonly RouteUrlRegexFactory regexFactory = new RouteUrlRegexFactory();
 		private Dictionary<string, IRouteConstraint> constraints;
 		private RouteValueDictionary dataTokens;
+		private bool isConnected;
 
         class Required
-        {
-        }
+        {}
 
         /// <summary>
         /// Initializes a new Content Sub Route
@@ -59,13 +57,17 @@ namespace N2Contrib.Mvc
 			this.constraints = (constraints as RouteValueDictionary ?? new RouteValueDictionary(constraints))
 				.ToDictionary(kvp => kvp.Key, kvp => CreateConstraint(kvp.Value));
 
-			this.dataTokens = dataTokens as RouteValueDictionary 
-				?? new RouteValueDictionary(dataTokens);
+			this.dataTokens = dataTokens as RouteValueDictionary ?? new RouteValueDictionary(dataTokens);
 			this.dataTokens[N2.Web.Mvc.ContentRoute.ContentEngineKey] = engine;
 
 			this.RouteHandler = routeHandler ?? new MvcRouteHandler();
-
             this.controllerMapper = engine.Resolve<IControllerMapper>();
+
+			// Check if the connection is is up
+			var connectionManager = engine.Resolve<ConnectionMonitor>();
+			isConnected = connectionManager.IsConnected ?? false;
+			connectionManager.Online += (s, a) => isConnected = true;
+			connectionManager.Offline += (s, a) => isConnected = false;
         }
 
 		private IRouteConstraint CreateConstraint(object constraint)
@@ -87,7 +89,7 @@ namespace N2Contrib.Mvc
         /// <returns></returns>
         public override RouteData GetRouteData(HttpContextBase httpContext)
         {
-			if (!engine.Resolve<InstallationManager>().GetStatus().IsInstalled)
+			if (!isConnected)
 				return null;
 
             var path = engine.UrlParser.ResolvePath(httpContext.Request.Url.PathAndQuery);

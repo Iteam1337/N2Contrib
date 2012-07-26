@@ -5,7 +5,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-namespace N2Contrib.Mvc
+namespace N2Contrib.Mvc.Routing
 {
 	public class RouteUrlRegexFactory
 	{

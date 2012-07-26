@@ -31,7 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-		<BuildPackage>true</BuildPackage>
+    <BuildPackage>true</BuildPackage>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
@@ -70,12 +70,12 @@
     <Compile Include="..\AssemblyVersion.cs">
       <Link>AssemblyVersion.cs</Link>
     </Compile>
-    <Compile Include="ContentSubRouteOfT.cs" />
-    <Compile Include="DelegateConstraint.cs" />
+    <Compile Include="Routing\ContentSubRoute.cs" />
+    <Compile Include="Routing\DelegateConstraint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegexConstraint.cs" />
+    <Compile Include="Routing\RegexConstraint.cs" />
     <Compile Include="RouteCollectionExtensions.cs" />
-    <Compile Include="RouteUrlRegexFactory.cs" />
+    <Compile Include="Routing\RouteUrlRegexFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="N2Contrib.Mvc.nuspec" />

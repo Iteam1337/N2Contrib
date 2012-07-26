@@ -8,8 +8,9 @@ using N2Contrib.TestHelper.Fakes;
 using N2Contrib.TestHelper.Mvc.Fakes;
 using N2Contrib.Tests.TestHelper.Fakes;
 using Xunit;
+using N2Contrib.Mvc.Routing;
 
-namespace N2Contrib.Tests.Mvc
+namespace N2Contrib.Tests.Mvc.Routing
 {
     public class ContentSubRouteTests
     {
@@ -39,7 +40,7 @@ namespace N2Contrib.Tests.Mvc
 		public void It_should_set_controller_from_controller_mapper()
 		{
 			var values = route.GetRouteValues("");
-			values["controller"].Should().Be("foo");
+			values["controller"].Should().Be("Foo");
 		}
 
 		public void It_should_allow_custom_controller()

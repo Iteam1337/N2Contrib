@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Routing;
 using System.Web;
 
-namespace N2Contrib.Mvc
+namespace N2Contrib.Mvc.Routing
 {
 	public class DelegateConstraint : IRouteConstraint
 	{
