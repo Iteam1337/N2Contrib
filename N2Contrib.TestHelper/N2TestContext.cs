@@ -5,6 +5,7 @@ using N2.Web;
 using N2;
 using System.Web.Routing;
 using System.Collections.Generic;
+using N2.Definitions;
 
 namespace N2Contrib.TestHelper
 {
@@ -13,6 +14,8 @@ namespace N2Contrib.TestHelper
     /// </summary>
     public class N2TestContext
     {
+		private int IdSeed = 0;
+
         /// <summary>
         /// Initializes a new N2TestContext
         /// </summary>
@@ -78,12 +81,17 @@ namespace N2Contrib.TestHelper
             var item = new T();
 
 			// Set the mandatory properties
+			item.ID = ++IdSeed;
             item.Title = name;
             item.Name = name;
 
-			// Set the internal start page flag
+			// Set the start page
 			if (isStartPage)
+			{
 				item["IsStartPage"] = true;
+				UrlParser.StartPage = item;
+				Engine.Host.DefaultSite.StartPageID = item.ID;
+			}
 			
 			// Any provided custom setters?
 			foreach (var setter in setters)
