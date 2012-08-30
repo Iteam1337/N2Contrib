@@ -92,7 +92,7 @@ namespace N2Contrib.Mvc.Routing
 			if (!isConnected)
 				return null;
 
-            var path = engine.UrlParser.ResolvePath(httpContext.Request.Url.PathAndQuery);
+            var path = engine.UrlParser.ResolvePath(httpContext.Request.Url.ToString());
             
             // No content route was found check for stopitem
 			if (path.CurrentPage != null)
