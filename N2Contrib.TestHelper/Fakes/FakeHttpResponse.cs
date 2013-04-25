@@ -20,6 +20,12 @@ namespace N2Contrib.TestHelper.Fakes
 
 		public override int StatusCode { get; set; }
 
+		private HttpCookieCollection cookies = new HttpCookieCollection();
+		public override HttpCookieCollection Cookies
+		{
+			get { return cookies; }
+		}
+
 		public override void Write(string s)
 		{
 			Output.Write(s);

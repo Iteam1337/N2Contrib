@@ -10,7 +10,13 @@ namespace N2Contrib.TestHelper.Fakes
 		public string appRelativeCurrentExecutionFilePath = "~/";
 		public NameValueCollection query = new NameValueCollection();
 		public NameValueCollection param = new NameValueCollection();
+		private HttpCookieCollection cookies = new HttpCookieCollection();
 		public string rawUrl = "/";
+
+		public override HttpCookieCollection Cookies
+		{
+			get { return cookies; }
+		}
 
 		public override System.Uri Url
 		{
