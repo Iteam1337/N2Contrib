@@ -23,5 +23,11 @@ namespace N2Contrib.TestHelper.Mvc.Fakes
 	    {
             return controllerName;
         }
+
+
+        public bool IsContentController(string controllerName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

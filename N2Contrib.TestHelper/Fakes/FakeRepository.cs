@@ -272,5 +272,21 @@ namespace N2Contrib.TestHelper.Fakes
         {
             return null;
         }
+
+
+        public long Count(IParameter parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<TEntity> Find(IParameter parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<IDictionary<string, object>> Select(IParameter parameters, params string[] properties)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

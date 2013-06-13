@@ -77,5 +77,19 @@ namespace N2Contrib.TestHelper.Fakes
         {
             return path;
         }
+
+        Url IUrlParser.BuildUrl(ContentItem item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public event EventHandler<UrlEventArgs> BuildingUrl;
+
+        public event EventHandler<UrlEventArgs> BuiltUrl;
+
+        public PathData FindPath(Url url, ContentItem startNode = null, string remainingPath = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

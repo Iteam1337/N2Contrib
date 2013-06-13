@@ -26,14 +26,19 @@ namespace N2Contrib.TestHelper.Fakes
 			this.Assemblies = assemblies;
 		}
 
-		public IList<Type> Find(Type requestedType)
+        public IEnumerable<Type> Find(Type requestedType)
 		{
 			return Types.Where(t => requestedType.IsAssignableFrom(requestedType)).ToList();
 		}
 
-		public IList<Assembly> GetAssemblies()
+        public IEnumerable<Assembly> GetAssemblies()
 		{
 			return Assemblies.ToList();
 		}
-	}
+
+        public IEnumerable<AttributedType<TAttribute>> Find<TAttribute>(Type requestedType, bool inherit = false) where TAttribute : class
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

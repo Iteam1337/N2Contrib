@@ -15,6 +15,8 @@ using N2.Edit.Workflow;
 using N2.Persistence.Proxying;
 using N2.Edit.FileSystem;
 using N2.Plugin;
+using N2.Persistence.Sources;
+using N2.Definitions.Static;
 
 namespace N2Contrib.TestHelper.Fakes
 {
@@ -31,15 +33,15 @@ namespace N2Contrib.TestHelper.Fakes
 			AddComponent<IUrlParser>(Fakes.UrlParser = new FakeUrlParser());
 			Fakes.FakeHttpContext = new FakeHttpContext();
 			AddComponent<IWebContext>(Fakes.WebContext = new FakeWebContextWrapper(Fakes.FakeHttpContext));
-			AddComponent<IRepository<ContentItem>>(Fakes.ContentItemRepository = new FakeRepository<ContentItem>());
+			AddComponent<IRepository<ContentItem>>(Fakes.ContentItemRepository = new FakeContentItemRepository());
 			AddComponent<IRepository<ContentDetail>>(Fakes.ContentDetailRepository = new FakeRepository<ContentDetail>());
-			AddComponent<IPersister>(new ContentPersister(Fakes.ContentItemRepository, Fakes.ContentDetailRepository));
+            AddComponent<IPersister>(new ContentPersister(Fakes.FakeContentSource, Fakes.ContentItemRepository));
 			AddComponent<ISecurityManager>(Fakes.SecurityManager = new FakeSecurityManager());
 			AddComponent<IFileSystem>(Fakes.FakeFileSystem = new FakeMemoryFileSystem());
 			AddComponent<IErrorNotifier>(Fakes.ErrorHandler = new FakeErrorHandler());
 			var contentTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes().Where(t => typeof(ContentItem).IsAssignableFrom(t)).Where(t => !t.IsAbstract)).ToArray();
 			AddComponent<ITypeFinder>(Fakes.TypeFinder = new FakeTypeFinder(contentTypes));
-            AddComponent<IDefinitionManager>(Fakes.Definitions = new DefinitionManager(new IDefinitionProvider[0], new ITemplateProvider[0], new ContentActivator(new StateChanger(), null, new EmptyProxyFactory()), new StateChanger()));
+            AddComponent<IDefinitionManager>(Fakes.Definitions = new DefinitionManager(new IDefinitionProvider[0], new ITemplateProvider[0], new ContentActivator(new StateChanger(), null, new EmptyProxyFactory()), new StateChanger(), DefinitionMap.Instance));
             AddComponent<IHost>(Fakes.Host = new Host(Fakes.WebContext, new N2.Configuration.HostSection{ Web = new N2.Configuration.WebElement { Extension = "" }}));
 			AddComponent<ConnectionMonitor>(Fakes.FakeConnectionMonitor = new FakeConnectionMonitor());
 		}
@@ -164,7 +166,7 @@ namespace N2Contrib.TestHelper.Fakes
 
         public ContentHelperBase Content
         {
-            get { return new ContentHelperBase(this, () => RequestContext.CurrentPath); }
+            get { return new ContentHelperBase(() => this, () => RequestContext.CurrentPath); }
         }
 
         #endregion
@@ -177,7 +179,7 @@ namespace N2Contrib.TestHelper.Fakes
 
 			public FakeWebContextWrapper WebContext { get; set; }
 
-			public FakeRepository<ContentItem> ContentItemRepository { get; set; }
+			public FakeContentItemRepository ContentItemRepository { get; set; }
 
 			public FakeRepository<ContentDetail> ContentDetailRepository { get; set; }
 
@@ -196,6 +198,8 @@ namespace N2Contrib.TestHelper.Fakes
 			public FakeMemoryFileSystem FakeFileSystem { get; set; }
 
 			public FakeConnectionMonitor FakeConnectionMonitor { get; set; }
+
+            public ContentSource FakeContentSource { get; set; }
 		}
 
         public class FakeServiceContainer : IServiceContainer
@@ -224,7 +228,7 @@ namespace N2Contrib.TestHelper.Fakes
                 throw new NotImplementedException();
             }
 
-            public T Resolve<T>()
+            public T Resolve<T>() where T : class
             {
                 if (services.ContainsKey(typeof(T)) == false)
                     throw new InvalidOperationException("No component for service " + typeof(T).Name + " registered");
@@ -232,7 +236,7 @@ namespace N2Contrib.TestHelper.Fakes
                 return (T)services[typeof(T)];
             }
 
-            public T Resolve<T>(string key)
+            public T Resolve<T>(string key) where T : class
             {
                 return (T)services[typeof(T)];
             }
@@ -259,7 +263,7 @@ namespace N2Contrib.TestHelper.Fakes
                 yield break;
             }
 
-            public T[] ResolveAll<T>()
+            public T[] ResolveAll<T>() where T : class
             {
                 if (!this.services.ContainsKey(typeof(T)))
                     return new T[0];
@@ -278,7 +282,24 @@ namespace N2Contrib.TestHelper.Fakes
             }
 
             #endregion
+
+
+            IEnumerable<T> IServiceContainer.ResolveAll<T>()
+            {
+                throw new NotImplementedException();
+            }
+
+            IEnumerable<object> IServiceContainer.ResolveAll(Type serviceType)
+            {
+                throw new NotImplementedException();
+            }
         }
 
+
+
+        public N2.Configuration.ConfigurationManagerWrapper Config
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

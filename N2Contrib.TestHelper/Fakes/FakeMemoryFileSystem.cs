@@ -109,5 +109,11 @@ namespace N2Contrib.TestHelper.Fakes
 		public event EventHandler<N2.Edit.FileEventArgs> DirectoryMoved = delegate { };
 
 		public event EventHandler<N2.Edit.FileEventArgs> DirectoryDeleted = delegate { };
-	}
+
+
+        public Stream OpenFile(string virtualPath, bool readOnly = false)
+        {
+            return new FileStream(Path.GetFullPath(virtualPath), FileMode.Open, (readOnly) ? FileAccess.Read : FileAccess.ReadWrite);
+        }
+    }
 }

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web.Routing;
 using System.Text.RegularExpressions;
+using System.Web;
+using System.Web.Routing;
 
 namespace N2Contrib.Mvc.Routing
 {
@@ -16,7 +17,7 @@ namespace N2Contrib.Mvc.Routing
 			this.regex = regex;
 		}
 
-		public bool Match(System.Web.HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+		public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
 		{
 			return regex.IsMatch((string)values[parameterName]);
 		}
