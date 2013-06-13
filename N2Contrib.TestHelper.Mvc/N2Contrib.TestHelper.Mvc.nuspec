@@ -7,7 +7,8 @@
     <authors>$author$</authors>
     <description>$description$</description>
     <language>en-US</language>
-    <dependencies>      <dependency id="N2CMS.Library" version="[2.2.6]" />
+    <dependencies>
+      <dependency id="N2CMS.Library" version="2.4.12" />
       <dependency id="N2Contrib.TestHelper" version="[$version$]" />
     </dependencies>
     <projectUrl>https://github.com/24hr/N2Contrib.TestHelper</projectUrl>
